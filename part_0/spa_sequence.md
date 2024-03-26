@@ -35,7 +35,7 @@ sequenceDiagram
 
     browser->>browser: render the notes    
 
-    Note right of browser: during the loading the page a javascript function is called to set the form callback -functionality 
+    Note right of browser: during the loading of the page a javascript function is called to set the form callback -functionality 
 
     browser->>browser: 'attach' the callback-function to form.onsubmit -event
 
