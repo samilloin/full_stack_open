@@ -35,28 +35,55 @@ const App = () => {
       text: 'The only way to go fast, is to go well.',
       count: 0 
     }
-}
+  }
    
   const [selected, setSelected] = useState(0)
   const [anecdotes, setAnectodes] = useState(a)
 
+  const getMostVoted = () => {
+
+    let winner = {}
+    let max=0
+
+    Object.keys(anecdotes).forEach(key => {
+      //console.log('count for anectode[' + key + '] = ' + anecdotes[key].count)
+      if (anecdotes[key].count > max) {
+        winner = anecdotes[key]
+        max = anecdotes[key].count       
+      }
+    });
+
+    return winner
+
+  }
+
+  const winner = getMostVoted();
+
   return (
     <div>
-      {anecdotes[selected].text}
-      <br/><br/>
+      <h2>Anectode of the day</h2>
+      <h3>"{anecdotes[selected].text}"</h3>
       This anecdote has {anecdotes[selected].count} votes
       <br/><br/>
       <button onClick={() => {
             const r = Math.floor((Math.random() * 8))
-            console.log('random:' + r)
+            //console.log('random:' + r)
             setSelected(r)
         }}>next anectode</button>&nbsp;&nbsp;
       <button onClick={() => {
             const copy = {...anecdotes}
             copy[selected].count += 1
             setAnectodes(copy)
-            console.log(anecdotes)
+            //console.log(anecdotes)
         }}>vote</button>
+      <br/><br/>
+      <h2>Acedote with most votes:</h2>
+      { winner.count > 0 &&  
+        <>
+        <h3>"{winner.text}"</h3>
+        Has {winner.count} votes
+        </>
+      }
     </div>
   )
 }
